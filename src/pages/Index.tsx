@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Shield, Lock, Users, Key } from 'lucide-react';
 
 const Index = () => {
-  const { user, isAdmin, loading } = useAuth();
+  const { user, isAdmin, loading, signOut } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,13 +27,25 @@ const Index = () => {
           <p className="text-xl text-white/90 mb-8">
             Gestión avanzada de usuarios VPN con autenticación 2FA
           </p>
-          <Button 
-            size="lg"
-            onClick={() => navigate('/auth')}
-            className="bg-white text-primary hover:bg-white/90 shadow-xl"
-          >
-            Acceder al portal
-          </Button>
+          <div className="flex gap-4 justify-center">
+            <Button 
+              size="lg"
+              onClick={() => navigate('/auth')}
+              className="bg-white text-primary hover:bg-white/90 shadow-xl"
+            >
+              Acceder al portal
+            </Button>
+            {user && (
+              <Button 
+                size="lg"
+                variant="outline"
+                onClick={() => signOut()}
+                className="bg-white/10 text-white border-white/20 hover:bg-white/20 shadow-xl"
+              >
+                Cerrar sesión
+              </Button>
+            )}
+          </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
