@@ -4,14 +4,16 @@ import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Shield, Plus, LogOut, Users } from 'lucide-react';
+import { Shield, Plus, LogOut, Users, Settings } from 'lucide-react';
 import { RadiusUserList } from '@/components/RadiusUserList';
 import { CreateRadiusUserDialog } from '@/components/CreateRadiusUserDialog';
+import { MikrotikConfigDialog } from '@/components/MikrotikConfigDialog';
 
 const Dashboard = () => {
   const { user, isAdmin, loading, signOut } = useAuth();
   const navigate = useNavigate();
   const [showCreateDialog, setShowCreateDialog] = useState(false);
+  const [showMikrotikDialog, setShowMikrotikDialog] = useState(false);
   const [radiusUsers, setRadiusUsers] = useState<any[]>([]);
   const [loadingUsers, setLoadingUsers] = useState(true);
 
@@ -75,10 +77,16 @@ const Dashboard = () => {
               <p className="text-sm text-muted-foreground">Administración de usuarios</p>
             </div>
           </div>
-          <Button variant="outline" onClick={handleSignOut}>
-            <LogOut className="w-4 h-4 mr-2" />
-            Cerrar sesión
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={() => setShowMikrotikDialog(true)}>
+              <Settings className="w-4 h-4 mr-2" />
+              Configurar Mikrotik
+            </Button>
+            <Button variant="outline" onClick={handleSignOut}>
+              <LogOut className="w-4 h-4 mr-2" />
+              Cerrar sesión
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -143,6 +151,11 @@ const Dashboard = () => {
         open={showCreateDialog}
         onOpenChange={setShowCreateDialog}
         onSuccess={loadRadiusUsers}
+      />
+
+      <MikrotikConfigDialog 
+        open={showMikrotikDialog}
+        onOpenChange={setShowMikrotikDialog}
       />
     </div>
   );

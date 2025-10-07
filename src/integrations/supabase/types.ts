@@ -38,6 +38,36 @@ export type Database = {
         }
         Relationships: []
       }
+      radius_config: {
+        Row: {
+          created_at: string
+          id: string
+          server_ip: string
+          server_port: number
+          service: string
+          shared_secret: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          server_ip: string
+          server_port?: number
+          service?: string
+          shared_secret: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          server_ip?: string
+          server_port?: number
+          service?: string
+          shared_secret?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       radius_users: {
         Row: {
           created_at: string
